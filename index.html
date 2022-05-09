@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeWork8</title>
+</head>
+<body>
+    <script>
+        const array = ['item-1', 'item-2', 'item-3', 'item-4', 'item-5'];
+
+        function map(array, callback) {
+            const res = [];
+
+            for (let i = 0; i < array.length; i++) {
+                res.push(callback(array[i], i, array))
+            }
+            return res;
+        }
+        function callback(item, index, array) {
+            if (item === 'item-1') {
+                item += ' addTest'
+            }
+            return item;
+        }
+
+        console.log(map(array, callback));
+
+        function filter(array, callback) {
+            const result = [];
+
+            for (let i = 0; i < array.length; i++) {
+                if (callback(array[i], i, array)) {
+                    result.push(array[i]);
+                }
+            }
+            return result
+        }
+        function cbFilter(item, index, array) {
+            let getResult = false;
+
+            if (item === 'item-5') {
+                getResult = true;
+            }
+            return getResult
+        }
+
+        console.log(filter(array, cbFilter));
+
+
+        const notification = [
+            {
+                date: '31/07/2019',
+                msg: 'Some message here 1'
+            },
+            {
+                date: '03/07/2019',
+                msg: 'Some message here 2'
+            },
+            {
+                date: '12/07/2019',
+                msg: 'Some message here 3'
+            },
+        ];
+
+        function group(notification) {
+            const obj = {}
+
+            notification.reduce((acc, item) => {
+                if (!acc[item.date]) {
+                    acc[item.date] = [];
+                    acc[item.date].push(item.msg)
+                } else {
+                    acc[item.date].push(item.msg) 
+                }
+                return acc;
+            }, obj)
+            return obj
+        }
+
+        console.log(group(notification));
+    </script>
+</body>
+</html>
